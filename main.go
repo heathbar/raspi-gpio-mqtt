@@ -21,11 +21,9 @@ func main() {
 		select {
 		case e := <-channel:
 			if e.Value == 0 {
-				fmt.Println("closed")
-				mqtt.publish("garage/door/status", "closed")
-			} else {
-				fmt.Println("open")
 				mqtt.publish("garage/door/status", "open")
+			} else {
+				mqtt.publish("garage/door/status", "closed")
 			}
 		}
 	}
