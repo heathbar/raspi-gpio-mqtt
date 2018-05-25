@@ -1,0 +1,13 @@
+[Unit]
+Description=Pin Watcher Service
+After=network.target
+
+[Service]
+Type=simple
+User=heathbar
+WorkingDirectory=/home/heathbar
+ExecStart=/home/heathbar/go/src/github.com/heathbar/raspi-gpio-mqtt -b tcp://mqtt.foo.com:1883
+Restart=on-failure # or always, on-abort, etc
+
+[Install]
+WantedBy=multi-user.target

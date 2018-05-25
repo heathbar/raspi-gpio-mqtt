@@ -17,6 +17,13 @@ go build
 sudo ./raspi-gpi-mqtt -b tcp://my-mqtt-server.com:1883
 ```
 
+### systemd
+```bash
+sudo cp ./raspi-gpio-mqtt.service /etc/systemd/system/
+sudo systemd enable raspi-gpio-mqtt
+sudo systemd start raspi-gpio-mqtt
+```
+
 ## TODO
 - mqtt security
 - mqtt QoS
