@@ -12,6 +12,8 @@ import (
 // MqttClient is a wrapper for the eclipse mqtt library
 type MqttClient struct {
 	Broker string
+	User string
+	Pass string
 	client mqtt.Client
 }
 
@@ -28,6 +30,14 @@ func (c *MqttClient) connect(clientID string) bool {
 	opts.SetClientID(client)
 	opts.SetAutoReconnect(true)
 	opts.SetMaxReconnectInterval(2 * time.Minute)
+
+	if c.User != "" {
+		opts.SetUsername(c.User)
+	}
+
+	if c.Pass != "" {
+		opts.SetPassword(c.Pass)
+	}
 
 	c.client = mqtt.NewClient(opts)
 	if token := c.client.Connect(); token.Wait() && token.Error() != nil {
